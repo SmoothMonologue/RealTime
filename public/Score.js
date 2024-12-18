@@ -52,8 +52,7 @@ class Score {
   }
 
   getCurrentStage(level) {
-    return stage_list != null ? stage_list[level] : stage_list[0];
-    //return stage_list[level];
+    return stage_list[level];
   }
 
   draw() {
@@ -69,10 +68,8 @@ class Score {
     const highScoreX = scoreX - 125 * this.scaleRatio;
 
     const stagePadded = stage_list
-      ? stage_list[this.stageLevel].id.toString().padStart(6, 0)
+      ? this.getCurrentStage(this.getStLv()).id.toString().padStart(6, 0)
       : Math.floor(1000).toString().padStart(6, 0);
-
-    //const stagePadded = this.getCurrentStage(this.getStLv()).id.toString().padStart(6, 0);
     const scorePadded = Math.floor(this.score).toString().padStart(6, 0);
     const highScorePadded = highScore.toString().padStart(6, 0);
 
