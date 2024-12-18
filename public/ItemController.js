@@ -3,7 +3,8 @@ import { item_list } from './Socket.js';
 
 class ItemController {
   INTERVAL_MIN = 0;
-  INTERVAL_MAX = 12000;
+  //템 구분 확인하기 위해 생성 간격 조절
+  INTERVAL_MAX = 1200;
 
   nextInterval = null;
   items = [];
@@ -27,7 +28,7 @@ class ItemController {
   }
 
   createItem(stageLevel) {
-    const index = this.getRandomNumber(0, stageLevel + 1);
+    const index = this.getRandomNumber(0, stageLevel);
     const itemInfo = this.itemImages[index];
     const x = this.canvas.width * 1.5;
     const y = this.getRandomNumber(10, this.canvas.height - itemInfo.height);
