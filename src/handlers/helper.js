@@ -15,7 +15,7 @@ export const handleConnection = (socket, uuid) => {
   console.log(`현재 접속 중: `, getUser());
 
   createStage(uuid);
-  socket.emit('connection', uuid);
+  socket.emit('connection', { uuid });
 };
 
 export const handleEvent = (io, socket, data) => {

@@ -15,9 +15,10 @@ export const moveStageHandler = (userId, payload) => {
 
   const serverTime = Date.now();
   const elaspedTime = (serverTime - currentStage.timestamp) / 1000;
+  let currentCutline = currentStage[currentStage.length - 1].score;
 
   //2스테이지로 넘어갈 때 체크
-  if (elaspedTime < 10 || elaspedTime > 15) {
+  if (elaspedTime < currentCutline || elaspedTime > currentCutline + 0.5) {
     return { status: 'fail', message: '못 넘어가유.' };
   }
 
@@ -26,7 +27,9 @@ export const moveStageHandler = (userId, payload) => {
     return { status: 'fail', message: '그 스테이지 맞니?' };
   }
 
+  console.log(userId, payload, payload.targetStage);
   setStage(userId, payload.targetStage, serverTime);
+  console.log('다음 스테이지로 넘어갑니다!');
   console.log(`Stage: `, getStage(userId));
 
   return { status: 'success' };
