@@ -1,13 +1,4 @@
-import { sendEvent } from './Socket.js';
-const STAGE_LIST = [
-  { id: 1000, score: 0 },
-  { id: 1001, score: 10 },
-  { id: 1002, score: 20 },
-  { id: 1003, score: 30 },
-  { id: 1004, score: 40 },
-  { id: 1005, score: 50 },
-  { id: 1006, score: 60 },
-];
+import { sendEvent, stage_list } from './Socket.js';
 
 class Score {
   score = 0;
@@ -24,11 +15,11 @@ class Score {
   update(deltaTime) {
     this.score += deltaTime * 0.001;
     // 점수가 10점씩 누적될 때마다 서버에 메세지 전송
-    if (Math.floor(this.score) === STAGE_LIST[this.stageLevel + 1].score && this.stageChange) {
+    if (Math.floor(this.score) === stage_list[this.stageLevel + 1].score && this.stageChange) {
       //this.stageChange = false;
       sendEvent(11, {
-        currentStage: STAGE_LIST[this.stageLevel].id,
-        targetStage: STAGE_LIST[++this.stageLevel].id,
+        currentStage: stage_list[this.stageLevel].id,
+        targetStage: stage_list[++this.stageLevel].id,
       });
     }
   }
@@ -39,6 +30,7 @@ class Score {
 
   reset() {
     this.score = 0;
+    this.stageLevel = 0;
   }
 
   setHighScore() {

@@ -209,7 +209,7 @@ function gameLoop(currentTime) {
     player.update(gameSpeed, deltaTime);
     updateGameSpeed(deltaTime);
 
-    score.update(deltaTime);
+    score.update(deltaTime /*, stage_list*/);
   }
 
   if (!gameover && cactiController.collideWith(player)) {

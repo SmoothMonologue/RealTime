@@ -11,11 +11,14 @@ export const handleDisconnect = (socket, uuid) => {
 };
 
 export const handleConnection = (socket, uuid) => {
+  //assets 받아두기
+  const assets = getGameAssets();
+
   console.log(`유저 접속: ${uuid}`);
   console.log(`현재 접속 중: `, getUser());
 
   createStage(uuid);
-  socket.emit('connection', { uuid });
+  socket.emit('connection', { uuid, assets });
 };
 
 export const handleEvent = (io, socket, data) => {
