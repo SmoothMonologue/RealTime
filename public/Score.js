@@ -15,11 +15,14 @@ class Score {
   update(deltaTime) {
     this.score += deltaTime * 0.001;
     // 점수가 10점씩 누적될 때마다 서버에 메세지 전송
-    if (Math.floor(this.score) > stage_list[this.stageLevel + 1].score && this.stageChange) {
+    if (
+      Math.floor(this.score) > this.getCurrentStage(this.getStLv() + 1).score &&
+      this.stageChange
+    ) {
       //this.stageChange = false;
       sendEvent(11, {
-        currentStage: stage_list[this.stageLevel].id,
-        targetStage: stage_list[++this.stageLevel].id,
+        currentStage: this.getCurrentStage(this.getStLv()).id,
+        targetStage: this.getCurrentStage(++this.stageLevel).id,
       });
     }
   }
@@ -46,6 +49,10 @@ class Score {
 
   getStLv() {
     return this.stageLevel;
+  }
+
+  getCurrentStage(level) {
+    return stage_list[level];
   }
 
   draw() {
