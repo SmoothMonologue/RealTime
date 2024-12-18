@@ -49,7 +49,6 @@ let ground = null;
 let cactiController = null;
 let itemController = null;
 let score = null;
-//let currentStage = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -204,12 +203,12 @@ function gameLoop(currentTime) {
     ground.update(gameSpeed, deltaTime);
     // 선인장
     cactiController.update(gameSpeed, deltaTime);
-    itemController.update(gameSpeed, deltaTime);
+    itemController.update(gameSpeed, deltaTime, score.getStLv());
     // 달리기
     player.update(gameSpeed, deltaTime);
     updateGameSpeed(deltaTime);
 
-    score.update(deltaTime /*, stage_list*/);
+    score.update(deltaTime);
   }
 
   if (!gameover && cactiController.collideWith(player)) {

@@ -44,6 +44,10 @@ class Score {
     return this.score;
   }
 
+  getStLv() {
+    return this.stageLevel;
+  }
+
   draw() {
     const highScore = Number(localStorage.getItem(this.HIGH_SCORE_KEY));
     const y = 20 * this.scaleRatio;
