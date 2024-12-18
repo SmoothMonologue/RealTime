@@ -49,6 +49,7 @@ let ground = null;
 let cactiController = null;
 let itemController = null;
 let score = null;
+//let currentStage = null;
 
 let scaleRatio = null;
 let previousTime = null;

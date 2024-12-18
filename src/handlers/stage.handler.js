@@ -27,7 +27,6 @@ export const moveStageHandler = (userId, payload) => {
     return { status: 'fail', message: '그 스테이지 맞니?' };
   }
 
-  console.log(userId, payload, payload.targetStage);
   setStage(userId, payload.targetStage, serverTime);
   console.log('다음 스테이지로 넘어갑니다!');
   console.log(`Stage: `, getStage(userId));
