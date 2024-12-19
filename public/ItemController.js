@@ -28,6 +28,7 @@ class ItemController {
   }
 
   createItem(stageLevel) {
+    //스테이지 레벨에 따라 index의 범위가 달라져서 생성하는 아이템 범위 제한
     const index = this.getRandomNumber(0, stageLevel);
     const itemInfo = this.itemImages[index];
     const x = this.canvas.width * 1.5;
