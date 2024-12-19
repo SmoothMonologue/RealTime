@@ -228,7 +228,7 @@ function gameLoop(currentTime) {
   score.draw();
   itemController.draw();
 
-  if (gameover) {
+  if (gameover && score.checkScore()) {
     showGameOver();
   }
 

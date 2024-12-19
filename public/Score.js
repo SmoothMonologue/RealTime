@@ -2,9 +2,11 @@ import { sendEvent, stage_list, item_list } from './Socket.js';
 
 class Score {
   score = 0;
+  checkTime = 0;
   HIGH_SCORE_KEY = 'highScore';
   stageChange = true;
   stageLevel = 0;
+  get_item_list = [];
 
   constructor(ctx, scaleRatio) {
     this.ctx = ctx;
@@ -14,7 +16,8 @@ class Score {
 
   update(deltaTime) {
     this.score += deltaTime * 0.001;
-    // 점수가 10점씩 누적될 때마다 서버에 메세지 전송
+    this.checkTime += deltaTime * 0.001;
+    // 점수가 100점씩 누적될 때마다 서버에 메세지 전송
     if (
       Math.floor(this.score) > this.getCurrentStage(this.getStLv() + 1).score &&
       this.stageChange
@@ -29,6 +32,15 @@ class Score {
 
   getItem(itemId) {
     this.score += item_list[itemId - 1].score;
+    this.get_item_list.push(item_list[itemId - 1]);
+  }
+
+  checkScore() {
+    let sumOfScore = 0;
+    this.get_item_list.forEach((got) => {
+      sumOfScore += got.score;
+    });
+    return this.score - this.checkTime === sumOfScore ? 1 : 0;
   }
 
   reset() {
