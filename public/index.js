@@ -41,6 +41,8 @@ const ITEM_CONFIG = [
   { width: 50 / 1.5, height: 50 / 1.5, id: 2, image: 'images/items/pokeball_yellow.png' },
   { width: 50 / 1.5, height: 50 / 1.5, id: 3, image: 'images/items/pokeball_purple.png' },
   { width: 50 / 1.5, height: 50 / 1.5, id: 4, image: 'images/items/pokeball_cyan.png' },
+  { width: 50 / 1.5, height: 50 / 1.5, id: 5, image: 'images/items/pokeball_cyan.png' },
+  { width: 50 / 1.5, height: 50 / 1.5, id: 6, image: 'images/items/pokeball_cyan.png' },
 ];
 
 // 게임 요소들
@@ -143,6 +145,15 @@ function showGameOver() {
   ctx.fillText('GAME OVER', x, y);
 }
 
+function showTaunt() {
+  const fontSize = 70 * scaleRatio;
+  ctx.font = `${fontSize}px Verdana`;
+  ctx.fillStyle = 'grey';
+  const x = canvas.width / 8;
+  const y = canvas.height / 2;
+  ctx.fillText('Are you cheater?', x, y);
+}
+
 function showStartGameText() {
   const fontSize = 40 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
@@ -230,6 +241,8 @@ function gameLoop(currentTime) {
 
   if (gameover && score.checkScore()) {
     showGameOver();
+  } else if (gameover && !score.checkScore()) {
+    showTaunt();
   }
 
   if (waitingToStart) {
