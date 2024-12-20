@@ -7,6 +7,7 @@
     { "id": 300, "stage_id": 1002, "item_id": 3 },
     { "id": 400, "stage_id": 1003, "item_id": 4 },
     { "id": 500, "stage_id": 1004, "item_id": 5 },
-    { "id": 600, "stage_id": 1005, "item_id": 6 }
+    { "id": 600, "stage_id": 1005, "item_id": 6 },
+    { "id": 700, "stage_id": 1006, "item_id": 7 }
   ]
 }

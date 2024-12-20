@@ -35,6 +35,7 @@ class ItemController {
     const y = this.getRandomNumber(10, this.canvas.height - itemInfo.height);
     const score = item_list[index].score;
 
+    console.log(stageLevel, index);
     const item = new Item(
       this.ctx,
       itemInfo.id,
