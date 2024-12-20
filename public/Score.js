@@ -22,11 +22,14 @@ class Score {
       Math.floor(this.score) > this.getCurrentStage(this.getStLv() + 1).score &&
       this.stageChange
     ) {
-      //this.stageChange = false;
       sendEvent(11, {
         currentStage: this.getCurrentStage(this.getStLv()).id,
         targetStage: this.getCurrentStage(++this.stageLevel).id,
       });
+    }
+    //최고 레벨의 스테이지 통과 시 게임 클리어
+    if (this.getStLv() >= stage_list.length) {
+      this.stageChange = false;
     }
   }
 
@@ -44,12 +47,14 @@ class Score {
       sumOfScore += got.score;
     });
     //총 점수와 게임 진행 시간의 차가 획득한 아이템 목록의 점수의 합과 같은지 검증
-    return preValue < sumOfScore + 0.5 && preValue > sumOfScore - 0.5 ? 1 : 0;
+    return Math.abs(preValue - sumOfScore) < 0.5 ? 1 : 0;
   }
 
   reset() {
     this.score = 0;
     this.stageLevel = 0;
+    this.checkTime = 0;
+    this.get_item_list = [];
   }
 
   setHighScore() {
