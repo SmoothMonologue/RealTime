@@ -1,4 +1,4 @@
-import { sendEvent, stage_list, item_list } from './Socket.js';
+import { sendEvent, stage_list, item_list, item_unlock_list } from './Socket.js';
 
 class Score {
   score = 0;
@@ -34,10 +34,24 @@ class Score {
   }
 
   getItem(itemId) {
-    //아이템을 먹을 때마다 점수 추가
-    this.score += item_list[itemId - 1].score;
-    //아이템을 먹을 때마다 획득 아이템 목록에 추가
-    this.get_item_list.push(item_list[itemId - 1]);
+    if (this.checkUnlock(itemId)) {
+      //아이템을 먹을 때마다 점수 추가
+      this.score += item_list[itemId - 1].score;
+      //아이템을 먹을 때마다 획득 아이템 목록에 추가
+      this.get_item_list.push(item_list[itemId - 1]);
+    }
+  }
+
+  //획득 아이템 검증
+  checkUnlock(itemId) {
+    //먹은 아이템이 현재 스테이지에 등장가능한지 검사
+    if (
+      item_unlock_list[this.getStLv()].stage_id >= stage_list[itemId - 1].id &&
+      item_unlock_list[this.getStLv()].item_id >= item_list[itemId - 1].id
+    ) {
+      return true;
+    }
+    return false;
   }
 
   checkScore() {
